@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import type { InternalProperty, VolumeFolio } from "../types";
-
-Modal.setAppElement("#root"); // Accessibility
 
 type Props = {
   property: InternalProperty;
@@ -14,6 +12,13 @@ const PropertyCard: React.FC<Props> = ({ property, onUpdate }) => {
   const [volume, setVolume] = useState(property.volumeFolio.volume || "");
   const [folio, setFolio] = useState(property.volumeFolio.folio || "");
   const [errors, setErrors] = useState<{ volume?: string; folio?: string }>({});
+
+  // Only set app element in browser
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      Modal.setAppElement("#root");
+    }
+  }, []);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
