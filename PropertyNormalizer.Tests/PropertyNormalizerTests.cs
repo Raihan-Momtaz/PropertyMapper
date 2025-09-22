@@ -1,8 +1,7 @@
 using System;
 using Xunit;
 using FluentAssertions;
-using PropertyNormalizerApi.Services; // <- this is where PropertyNormalizer lives
-using PropertyNormalizerApi.Models;   // <- for ExternalProperty, Title, etc.
+using PropertyNormalizerApi.Models;   // For ExternalProperty, Title, etc.
 
 namespace PropertyNormalizerApi.Tests
 {
@@ -22,7 +21,7 @@ namespace PropertyNormalizerApi.Tests
                 Extra: null
             );
 
-            var result = PropertyNormalizer.NormalizeProperty(external);
+            var result = PropertyNormalizerApi.Services.PropertyNormalizer.NormalizeProperty(external);
 
             result.Status.Should().Be("KnownVolFol");
             result.VolumeFolio.Volume.Should().Be("1234");
@@ -45,12 +44,61 @@ namespace PropertyNormalizerApi.Tests
                 Extra: null
             );
 
-            var result = PropertyNormalizer.NormalizeProperty(external);
+            var result = PropertyNormalizerApi.Services.PropertyNormalizer.NormalizeProperty(external);
 
             result.Status.Should().Be("UnknownVolFol");
             result.VolumeFolio.Volume.Should().BeNull();
             result.VolumeFolio.Folio.Should().BeNull();
             result.FullAddress.Should().Be("456 High St, Sydney, NSW 2000");
         }
+
+        [Fact]
+        public void NormalizeProperty_ShouldComposeAddress_WhenFormattedAddressIsNull()
+        {
+            var external = new ExternalProperty(
+                Provider: "TestProvider",
+                RequestId: "REQ002",
+                ReceivedAt: DateTimeOffset.Now,
+                AddressParts: new AddressParts(
+                    Street: "789 Collins St",
+                    Suburb: "Docklands",
+                    State: "VIC",
+                    Postcode: "3008"
+                ),
+                FormattedAddress: null,
+                LotPlan: null,
+                Title: new Title("1234", "56"),
+                Extra: null
+            );
+
+            var result = PropertyNormalizerApi.Services.PropertyNormalizer.NormalizeProperty(external);
+
+            result.FullAddress.Should().Be("789 Collins St Docklands VIC 3008");
+            result.Status.Should().Be("KnownVolFol");
+        }
+
+        [Fact]
+        public void NormalizeProperty_ShouldPreserveSourceTrace()
+        {
+            var now = DateTimeOffset.Now;
+
+            var external = new ExternalProperty(
+                Provider: "ProviderX",
+                RequestId: "REQ123",
+                ReceivedAt: now,
+                AddressParts: null,
+                FormattedAddress: "10 King St, Brisbane, QLD 4000",
+                LotPlan: null,
+                Title: new Title("5678", "90"),
+                Extra: null
+            );
+
+            var result = PropertyNormalizerApi.Services.PropertyNormalizer.NormalizeProperty(external);
+
+            result.SourceTrace.Provider.Should().Be("ProviderX");
+            result.SourceTrace.RequestId.Should().Be("REQ123");
+            result.SourceTrace.ReceivedAt.Should().Be(now.ToString("o"));
+        }
+
     }
 }
