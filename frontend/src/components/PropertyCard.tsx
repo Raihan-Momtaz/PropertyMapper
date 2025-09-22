@@ -20,6 +20,14 @@ const PropertyCard: React.FC<Props> = ({ property, onUpdate }) => {
     }
   }, []);
 
+    useEffect(() => {
+    if (isModalOpen) {
+      setVolume(property.volumeFolio.volume || "");
+      setFolio(property.volumeFolio.folio || "");
+      setErrors({});
+    }
+  }, [isModalOpen, property]);
+  
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
