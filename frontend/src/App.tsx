@@ -15,7 +15,6 @@ const App: React.FC = () => {
     try {
       const property = await getPropertyById(propertyIdInput);
       setPropertyData({ id: propertyIdInput, property });
-      console.log(property);
     } catch (err) {
       console.error("Failed to fetch property:", err);
     }

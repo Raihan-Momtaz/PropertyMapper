@@ -32,25 +32,25 @@ describe("<PropertyCard />", () => {
     expect(screen.getByText(/Volume\/Folio: 1234 \/ 56/)).toBeInTheDocument();
   });
 
-it("opens and closes modal", () => {
-  render(<PropertyCard property={mockProperty} onUpdate={onUpdate} />);
-  
-  // Click the button
-  fireEvent.click(screen.getByRole("button", { name: "Edit Volume/Folio" }));
-  
-  // Check that modal heading is visible
-  expect(screen.getByRole("heading", { name: "Edit Volume/Folio" })).toBeInTheDocument();
-  
-  fireEvent.click(screen.getByRole("button", { name: "Close" }));
-});
-
+  it("opens and closes modal", () => {
+    render(<PropertyCard property={mockProperty} onUpdate={onUpdate} />);
+    
+    fireEvent.click(screen.getByRole("button", { name: "Edit Volume/Folio" }));
+    expect(screen.getByRole("heading", { name: "Edit Volume/Folio" })).toBeInTheDocument();
+    
+    fireEvent.click(screen.getByRole("button", { name: "Close" }));
+  });
 
   it("shows validation errors", () => {
     render(<PropertyCard property={mockProperty} onUpdate={onUpdate} />);
     fireEvent.click(screen.getByText("Edit Volume/Folio"));
-    fireEvent.change(screen.getByLabelText("Volume:"), { target: { value: "abcdef" } });
-    fireEvent.change(screen.getByLabelText("Folio:"), { target: { value: "123456" } });
+
+    // Input invalid values to trigger validation
+    fireEvent.change(screen.getByLabelText("Volume:"), { target: { value: "" } }); // empty triggers error
+    fireEvent.change(screen.getByLabelText("Folio:"), { target: { value: "" } });  // empty triggers error
+
     fireEvent.click(screen.getByText("Confirm"));
+
     expect(screen.getByText("Volume must be 1-6 digits")).toBeInTheDocument();
     expect(screen.getByText("Folio must be 1-5 digits")).toBeInTheDocument();
   });
@@ -58,9 +58,12 @@ it("opens and closes modal", () => {
   it("calls onUpdate on valid confirm", () => {
     render(<PropertyCard property={mockProperty} onUpdate={onUpdate} />);
     fireEvent.click(screen.getByText("Edit Volume/Folio"));
+
     fireEvent.change(screen.getByLabelText("Volume:"), { target: { value: "9999" } });
     fireEvent.change(screen.getByLabelText("Folio:"), { target: { value: "12" } });
+
     fireEvent.click(screen.getByText("Confirm"));
+
     expect(onUpdate).toHaveBeenCalledWith({ volume: "9999", folio: "12" });
   });
 });

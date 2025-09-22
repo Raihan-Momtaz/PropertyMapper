@@ -27,7 +27,7 @@ const PropertyCard: React.FC<Props> = ({ property, onUpdate }) => {
       setErrors({});
     }
   }, [isModalOpen, property]);
-  
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -61,17 +61,32 @@ const PropertyCard: React.FC<Props> = ({ property, onUpdate }) => {
         shouldCloseOnOverlayClick
       >
         <h2>Edit Volume/Folio</h2>
-        <label>
-          Volume:
-          <input value={volume} onChange={(e) => setVolume(e.target.value)} />
-          {errors.volume && <span style={{ color: "red" }}>{errors.volume}</span>}
-        </label>
-        <br />
-        <label>
-          Folio:
-          <input value={folio} onChange={(e) => setFolio(e.target.value)} />
-          {errors.folio && <span style={{ color: "red" }}>{errors.folio}</span>}
-        </label>
+          <label>
+            Volume:
+            <input
+              value={volume}
+              onChange={(e) => {
+                // Only allow digits, max 6 characters
+                const val = e.target.value.replace(/\D/g, "").slice(0, 6);
+                setVolume(val);
+              }}
+            />
+            {errors.volume && <span style={{ color: "red" }}>{errors.volume}</span>}
+          </label>
+
+          <label>
+            Folio:
+            <input
+              value={folio}
+              onChange={(e) => {
+                // Only allow digits, max 5 characters
+                const val = e.target.value.replace(/\D/g, "").slice(0, 5);
+                setFolio(val);
+              }}
+            />
+            {errors.folio && <span style={{ color: "red" }}>{errors.folio}</span>}
+          </label>
+
         <br />
         <button onClick={handleConfirm}>Confirm</button>
         <button onClick={closeModal}>Close</button>
