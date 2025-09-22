@@ -1,0 +1,18 @@
+# Node
+node_modules/
+dist/
+.env
+.vite/
+
+# Visual Studio / .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+*.vs/
+
+# OS
+.DS_Store
+Thumbs.db

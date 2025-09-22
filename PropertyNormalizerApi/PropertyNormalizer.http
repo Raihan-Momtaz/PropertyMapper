@@ -1,0 +1,6 @@
+@PropertyNormalizer_HostAddress = http://localhost:5070
+
+GET {{PropertyNormalizer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
