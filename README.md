@@ -4,16 +4,7 @@
 A full-stack application to normalize and manage property details.  
 The project contains a **.NET 9 API** backend and a **React + TypeScript** frontend.
 
----
 
-## 📂 Project Structure
-
-
-
-Property Mapper/
-├── PropertyNormalizerApi/ # Backend API (C# .NET 9)
-├── PropertyNormalizer.Tests/ # Unit tests for backend
-└── frontend/ # Frontend (React + TypeScript)
 
 
 ---
