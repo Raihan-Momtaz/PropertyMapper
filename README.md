@@ -71,14 +71,10 @@ calls onUpdate on valid confirm
 
 Use Cases:
 
-Writing React components and TypeScript types
-
 Suggesting CSS layout and styling improvements
 
 Generating detailed commit messages
 
 Manual testing in Postman and React dev server
-
-Compilation success for backend 
 
 TypeScript type checks
