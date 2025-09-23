@@ -62,11 +62,11 @@ NormalizeProperty_ShouldPreserveSourceTrace – Confirms that the SourceTrace fi
     calls onUpdate on valid confirm   
 
 
- AI Tools Used and How Verified:
+ # AI Tools Used and How Verified:
 
  Tool: ChatGPT (GPT-4 / GPT-5)
 
-# Use Cases:
+Use Cases:
 
 Writing React components and TypeScript types
 
