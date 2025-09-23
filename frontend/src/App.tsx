@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import type { ExternalProperty, InternalProperty, VolumeFolio } from "./types";
 import PropertyCard from "./components/PropertyCard";
 import { normalizeProperty, updateVolumeFolio, getPropertyById } from "./api/propertyApi";
+import "./App.css"; // import styles
 
 const App: React.FC = () => {
   const [propertyData, setPropertyData] = useState<{
@@ -47,24 +48,19 @@ const App: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <div style={{ marginBottom: "1rem" }}>
-        <input
-          type="text"
-          placeholder="Enter property ID"
-          value={propertyIdInput}
-          onChange={(e) => setPropertyIdInput(e.target.value)}
-        />
-        <button onClick={handleFetchById}>Fetch Property</button>
-      </div>
-      <button onClick={handleNormalize}>Normalize Property</button>
+    <div className="app-container">
+      <button className="btn primary" onClick={handleNormalize} type="button">
+        Normalize Property
+      </button>
 
-      {propertyData && (
-        <PropertyCard
-          property={propertyData.property}
-          onUpdate={handleUpdate}
-        />
-      )}
+      <div className="property-card-container">
+        {propertyData && (
+          <PropertyCard
+            property={propertyData.property}
+            onUpdate={handleUpdate}
+          />
+        )}
+      </div>
     </div>
   );
 };

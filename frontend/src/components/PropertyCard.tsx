@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import type { InternalProperty, VolumeFolio } from "../types";
 
+
 type Props = {
   property: InternalProperty;
   onUpdate: (vf: VolumeFolio) => void;
@@ -46,7 +47,7 @@ const PropertyCard: React.FC<Props> = ({ property, onUpdate }) => {
   };
 
   return (
-    <div style={{ border: "1px solid #ccc", padding: "1rem", marginBottom: "1rem" }}>
+    <div className="property-card" style={{ border: "1px solid #ccc", padding: "1rem", marginBottom: "1rem" }}>
       <h3>{property.fullAddress}</h3>
       {property.lotPlan && <p>Lot/Plan: {property.lotPlan.lot} / {property.lotPlan.plan}</p>}
       <p>Volume/Folio: {property.volumeFolio.volume || "-"} / {property.volumeFolio.folio || "-"}</p>
@@ -60,6 +61,7 @@ const PropertyCard: React.FC<Props> = ({ property, onUpdate }) => {
         shouldCloseOnEsc
         shouldCloseOnOverlayClick
       >
+        <div className="edit-modal">
         <h2>Edit Volume/Folio</h2>
           <label>
             Volume:
@@ -90,8 +92,10 @@ const PropertyCard: React.FC<Props> = ({ property, onUpdate }) => {
         <br />
         <button onClick={handleConfirm}>Confirm</button>
         <button onClick={closeModal}>Close</button>
+        </div>
       </Modal>
     </div>
+    
   );
 };
 

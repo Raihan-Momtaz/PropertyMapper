@@ -1,0 +1,85 @@
+/* Modal container */
+.edit-modal {
+  max-width: 300px;            /* narrower width */
+  margin: 0 auto;              /* center horizontally */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  text-align: left;
+  font-family: Arial, sans-serif;
+}
+
+/* Centered heading */
+.edit-modal h2 {
+  font-size: 20px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Labels and inputs */
+.edit-modal label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 500;
+  color: #333;
+}
+
+.edit-modal input {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Error messages */
+.edit-modal .error {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Buttons container */
+.edit-modal .buttons {
+  display: flex;
+  justify-content: center;     /* center buttons horizontally */
+  gap: 10px;                   /* space between buttons */
+  margin-top: 10px;
+}
+
+/* Confirm button */
+.edit-modal .btn-confirm {
+  background-color: #ff4d4f;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.edit-modal .btn-confirm:hover {
+  background-color: #d9363e;
+}
+
+/* Close button */
+.edit-modal .btn-close {
+  background-color: #6c757d;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.edit-modal .btn-close:hover {
+  background-color: #5a6268;
+}
