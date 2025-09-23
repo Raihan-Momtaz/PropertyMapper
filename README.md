@@ -56,13 +56,13 @@ NormalizeProperty_ShouldPreserveSourceTrace – Confirms that the SourceTrace fi
 
 # Frontend test cases:
 
-   renders property info
+renders property info
    
-    opens and closes modal  
+opens and closes modal  
     
-    shows validation errors    
+shows validation errors    
     
-    calls onUpdate on valid confirm   
+calls onUpdate on valid confirm   
 
 
  # AI Tools Used and How Verified:
